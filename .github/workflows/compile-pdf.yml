@@ -20,12 +20,12 @@ jobs:
         uses: EasonSYC/latex-style-setup@main
 
       - name: Declare Commit Information
-        run:
+        run: |
           commit_sha=$(git rev-parse --short HEAD)
           commit_date=$(git log -1 --format=%cd --date=format:%Y%m%d)
       
       - name: Append to Version File
-        run:
+        run: |
           echo "" >> version.tex
           echo "\renewcommand{\DATE}{$commit_date}" >> version.tex
           echo "\renewcommand{\COMMITSHA}{$commit_sha}" >> version.tex
