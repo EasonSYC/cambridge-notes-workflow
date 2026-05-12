@@ -29,6 +29,10 @@ jobs:
           echo "" >> version.tex
           echo "\renewcommand{\DATE}{${{ env.commit_date }}}" >> version.tex
           echo "\renewcommand{\COMMITSHA}{${{ env.commit_sha }}}" >> version.tex
+
+          echo "${{ env.commit_date }}"
+          echo "${{ env.commit_sha }}"
+          cat version.tex
       
       - name: Compile PDF
         run: latexmk -pdflatex -interaction=nonstopmode -file-line-error main.tex
