@@ -11,7 +11,6 @@ jobs:
 
     steps:
       - name: Checkout
-        id: checkout
         uses: actions/checkout@v6
         with:
           submodules: recursive
@@ -37,7 +36,6 @@ jobs:
         run: mv main.pdf ${{ github.event.repository.name }}-${{ env.commit_date }}-${{ env.commit_sha }}.pdf
 
       - name: Upload PDF file
-        id: upload-pdf
         uses: actions/upload-artifact@v7
         with:
           archive: false
