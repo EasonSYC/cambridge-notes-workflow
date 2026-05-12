@@ -21,24 +21,24 @@ jobs:
 
       - name: Declare Commit Information
         run: |
-          commit_sha=$(git rev-parse --short HEAD)
-          commit_date=$(git log -1 --format=%cd --date=format:%Y%m%d)
+          echo "commit_sha=$(git rev-parse --short HEAD)" >> "$GITHUB_ENV"
+          echo "commit_date=$(git log -1 --format=%cd --date=format:%Y%m%d)" >> "$GITHUB_ENV"
       
       - name: Append to Version File
         run: |
           echo "" >> version.tex
-          echo "\renewcommand{\DATE}{$commit_date}" >> version.tex
-          echo "\renewcommand{\COMMITSHA}{$commit_sha}" >> version.tex
+          echo "\renewcommand{\DATE}{${{ env.commit_date }}}" >> version.tex
+          echo "\renewcommand{\COMMITSHA}{${{ env.commit_sha }}}" >> version.tex
       
       - name: Compile PDF
         run: latexmk -pdflatex -interaction=nonstopmode -file-line-error main.tex
 
       - name: Rename PDF
-        run: mv main.pdf ${{ github.event.repository.name }}-$commmit_date-$commit_sha.pdf
+        run: mv main.pdf ${{ github.event.repository.name }}-${{ env.commit_date }}-${{ env.commit_sha }}.pdf
 
       - name: Upload PDF file
         id: upload-pdf
         uses: actions/upload-artifact@v7
         with:
           archive: false
-          path: ${{ github.event.repository.name }}-$commmit_date-$commit_sha.pdf
+          path: ${{ github.event.repository.name }}-${{ env.commit_date }}-${{ env.commit_sha }}.pdf
