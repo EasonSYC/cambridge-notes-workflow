@@ -24,10 +24,6 @@ jobs:
           echo "commit_sha=$(git rev-parse --short "${{ github.SHA }}")" >> "$GITHUB_ENV"
 
           echo "commit_date=$(git log -1 --format=%cd --date=format:%Y%m%d)" >> "$GITHUB_ENV"
-
-          echo "SHA - ${{ env.commit_sha }}"
-
-          echo "DATE - ${{ env.commit_date }}"
       
       - name: Override Version File
         run:
