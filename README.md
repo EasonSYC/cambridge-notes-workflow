@@ -1,3 +1,3 @@
-# cambridge-notes-workflow
+# latex-style-workflow
 
-Reusable workflows for my notes repositories.
+Reusable workflows for my LaTeX repositories.
